@@ -9,6 +9,7 @@
   "author": "Matt Gibb",
   "license": "ISC",
   "dependencies": {
-    "file-loader": "^0.8.1"
+    "file-loader": "^0.8.1",
+    "react": "^0.12.2"
   }
 }
