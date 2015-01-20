@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './entry.js',
+  entry: ['./src/index.js', './src/js/app.js'],
   output: {
-    path: __dirname,
+    path: __dirname + "/dist",
     filename: "bundle.js"
   },
   module: {
@@ -9,5 +9,8 @@ module.exports = {
       { test: /\.css$/, loader: "style!css" },
       { test: /\.coffee$/, loader: 'coffee-loader' }
     ]
+  },
+  devServer: {
+    contentBase: "./dist",
   }
 };

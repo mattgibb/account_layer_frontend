@@ -1,0 +1,14 @@
+{
+  "name": "account_layer_frontend",
+  "version": "1.0.0",
+  "description": "An accounting React app",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt Gibb",
+  "license": "ISC",
+  "dependencies": {
+    "file-loader": "^0.8.1"
+  }
+}
