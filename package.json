@@ -9,7 +9,14 @@
   "author": "Matt Gibb",
   "license": "ISC",
   "dependencies": {
-    "file-loader": "^0.8.1",
     "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "file-loader": "^0.8.1",
+    "jsx-loader": "^0.12.2",
+    "react-hot-loader": "^1.1.4",
+    "reflux": "^0.2.4",
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
   }
 }

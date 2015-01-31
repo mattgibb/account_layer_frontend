@@ -1,13 +1,17 @@
 module.exports = {
-  entry: ['./src/index.js', './src/js/app.js'],
+  entry: ['./src/index.js', './src/js/init.js'],
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js"
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.coffee$/, loader: 'coffee-loader' }
+      { test: /\.jsx$/, loader: "jsx?harmony" }
+      { test: /\.js$/, exclude: '/node_modules/', loader: "6to5-loader" }
     ]
   },
   devServer: {
