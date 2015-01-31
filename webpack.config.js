@@ -5,13 +5,13 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   },
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.jsx$/, loader: "jsx?harmony" },
-      { test: /\.js$/, exclude: '/node_modules/', loader: "6to5-loader" }
+      { test: /\.js$/, exclude: '/node_modules/', loader: "jsx?harmony" }/**,
+      { test: /\.js$/, exclude: '/node_modules/', loader: "6to5-loader" }*/
     ]
   },
   devServer: {
