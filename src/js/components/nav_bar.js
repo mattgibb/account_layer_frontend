@@ -1,38 +1,20 @@
-React = require('react')
-li = React.DOM.li
-a  = React.DOM.a
-var p = React.DOM.p
-/**
-NavBarItem = React.createClass
-  classes: ->
-    "active" if @props.active
-  render: ->
-    li {},
-      a 
-        href: "#"
-        className: @classes()
-        onClick: @props.onClick
-        @props.children
-*/
-NavBar = React.createClass({
-/**
-  setPage: (event) ->
-    @props.setPage event.target.textContent
+var React = require('react')
+var {Link} = require('react-router')
 
-  pages: [
-    'Home'
-    'Accounts'
-    'Transactions'
-    'BankTransactions'
-  ]
-
-  createItem: (page) ->
-    `<NavBarItem active={page == this.props.page}
-                 onClick={this.setPage}
-                 key={page}>{page}</NavBarItem>`
-*/
-  render: function() { return p({}, "this is where the nav should be.")}
-    /**`<nav className="navbar navbar-fixed-top navbar-inverse">
+var NavBar = React.createClass({
+  links() {
+    return (
+      <ul className="nav navbar-nav">
+        <li><Link to="home">Home</Link></li>
+        <li><Link to="/accounts">Accounts</Link></li>
+        <li><Link to="/transactions">Transactions</Link></li>
+        <li><Link to="/bank-transactions">Bank Transactions</Link></li>
+      </ul>
+    )
+  },
+  render() {
+    return (
+      <nav className="navbar navbar-fixed-top navbar-inverse">
        <div className="container">
          <div className="navbar-header">
            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,17 +26,16 @@ NavBar = React.createClass({
            <a className="navbar-brand" href="#">Account Layer</a>
          </div>
          <div id="navbar" className="collapse navbar-collapse">
-           <ul className="nav navbar-nav">
-             {this.pages.map(this.createItem)}
-           </ul>
+           {this.links()}
            <ul className="nav navbar-nav navbar-right">
              <li><p className="admin-name">{this.props.adminName}</p></li>
              <li><a href="/signout">Sign Out</a></li>
            </ul>
          </div>
        </div>
-     </nav>`
-     */
+     </nav>
+    )
+  }
 })
 
-module.exports = React.createFactory(NavBar)
+module.exports = NavBar
