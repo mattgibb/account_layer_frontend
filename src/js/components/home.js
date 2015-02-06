@@ -9,11 +9,6 @@ var Home = React.createClass({
     return (
       <div className="jumbotron">
         <h1>Name: {this.state.name}</h1>
-        <h1>Name: {this.state.name}</h1>
-        <h1>Name: {this.state.name}</h1>
-        <h1>Name: {this.state.name}</h1>
-        <h1>Name: {this.state.name}</h1>
-        <h1>Name: {this.state.name}</h1>
       </div>
     )
   }

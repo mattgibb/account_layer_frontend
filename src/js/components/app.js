@@ -13,4 +13,4 @@ var App = React.createClass({
   }
 })
 
-module.exports = React.createFactory(App)
+module.exports = App
