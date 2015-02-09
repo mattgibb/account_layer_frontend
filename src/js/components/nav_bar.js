@@ -1,7 +1,13 @@
 var React = require('react')
 var {Link} = require('react-router')
 
+var Actions = require('../actions/actions')
+
 var NavBar = React.createClass({
+  signOut() {
+    Actions.setJwt();
+  },
+
   links() {
     return (
       <ul className="nav navbar-nav">
@@ -12,6 +18,7 @@ var NavBar = React.createClass({
       </ul>
     )
   },
+
   render() {
     return (
       <nav className="navbar navbar-fixed-top navbar-inverse">
@@ -29,7 +36,7 @@ var NavBar = React.createClass({
            {this.links()}
            <ul className="nav navbar-nav navbar-right">
              <li><p className="admin-name">{this.props.adminName}</p></li>
-             <li><a href="/signout">Sign Out</a></li>
+             <li><a onClick={this.signOut}>Sign Out</a></li>
            </ul>
          </div>
        </div>

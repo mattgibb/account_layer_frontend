@@ -1,12 +1,9 @@
 var Reflux = require('reflux');
 
-module.exports = Reflux.createActions({
-    fetchTransactions: {
-      asyncResult: true
-    }
+var Actions = Reflux.createActions({
+    fetchTransactions: {asyncResult: true},
+    setJwt: {},
 });
-  "fetchTransactions",
-  "reconcileTransaction"
     // "toggleItem",     // called by button in TodoItem
     // "toggleAllItems", // called by button in TodoMain (even though you'd think TodoHeader)
     // "addItem",        // called by hitting enter in field in TodoHeader
@@ -14,8 +11,10 @@ module.exports = Reflux.createActions({
     // "clearCompleted", // called by button in TodoFooter
     // "editItem"        // called by finishing edit in TodoItem
 
-module.exports.fetchTransactions.listen(function() {
-  someAsyncOperation()
-    .then(this.completed)
-    .catch(this.failed)
+Actions.fetchTransactions.listen(function() {
+  // someAsyncOperation()
+  //   .then(this.completed)
+  //   .catch(this.failed)
 })
+
+module.exports = Actions;

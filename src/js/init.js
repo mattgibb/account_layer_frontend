@@ -22,7 +22,7 @@ var routes =
 
 document.addEventListener("DOMContentLoaded", function(event) {
   // for history
-  // Router.run(routes, Router.HistoryLocation, function(Handler, state) { 
+  // Router.run(routes, Router.HistoryLocation, function(Handler, state) {
   Router.run(routes, function(Handler, state) {
     React.render(<Handler/>, document.body)
   });

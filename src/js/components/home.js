@@ -5,6 +5,10 @@ var transactions = require('../stores/transactions')
 var Home = React.createClass({
   mixins: [Reflux.connect(transactions)],
 
+  getInitialState() {
+    return {};
+  },
+
   render() {
     return (
       <div className="jumbotron">
