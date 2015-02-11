@@ -14,7 +14,7 @@ var NavBar = React.createClass({
         <li><Link to="home">Home</Link></li>
         <li><Link to="/accounts">Accounts</Link></li>
         <li><Link to="/transactions">Transactions</Link></li>
-        <li><Link to="/bank-transactions">Bank Transactions</Link></li>
+        <li><Link to="/bank_transactions">Bank Transactions</Link></li>
       </ul>
     )
   },

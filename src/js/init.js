@@ -13,7 +13,7 @@ var routes =
     <DefaultRoute name="home" handler={Home}/>
     <Route name="accounts" handler={Resource}/>
     <Route name="transactions" handler={Resource}/>
-    <Route name="bank-transactions" handler={Resource}/>
+    <Route name="bank_transactions" handler={Resource}/>
   </Route>
   // <DefaultRoute handler={Home} />
   // <Route name="about" handler={About} />

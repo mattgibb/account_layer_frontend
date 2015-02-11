@@ -2,24 +2,33 @@ var Reflux = require('reflux');
 
 var Actions = require('../actions/actions')
 
+function parseJwt(jwt) {
+  // see http://jwt.io/ for details
+  if(jwt)
+    return JSON.parse(atob(jwt.split('.')[1]));
+}
+
+function payload(jwt) {
+  return {
+    jwt: jwt,
+    admin: parseJwt(jwt),
+    loggedIn: !!jwt
+  }
+}
+
+function onSetJwt(jwt) {
+  localStorage.setItem('jwt', jwt);
+  this.trigger(payload(jwt));
+}
+
 var Admin = Reflux.createStore({
-  parseJwt(jwt) {
-    // see http://jwt.io/ for details
-    if(jwt)
-      return JSON.parse(atob(jwt.split('.')[1]));
-  },
-
   init() {
-    this.listenTo(Actions.setJwt, this.onSetJwt)
+    this.listenTo(Actions.setJwt, onSetJwt);
   },
 
-  onSetJwt(jwt) {
-    var payload = this.parseJwt(jwt);
-
-    this.trigger({
-      admin: payload,
-      loggedIn: !!jwt
-    })
+  getInitialState() {
+    var jwt = localStorage.getItem('jwt');
+    return payload(jwt);
   }
 })
 
