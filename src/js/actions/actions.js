@@ -1,8 +1,11 @@
 var Reflux = require('reflux');
 var request = require('superagent');
 
+var {serverOrigin} = require('../env')
+
 var Actions = Reflux.createActions({
   fetch: {asyncResult: true},
+  uploadBankStatement: {asyncResult: true},
   setJwt: {}
 });
     // "toggleItem",     // called by button in TodoItem
@@ -13,8 +16,7 @@ var Actions = Reflux.createActions({
     // "editItem"        // called by finishing edit in TodoItem
 
 Actions.fetch.listen((path) => {
-  // TODO: retrieve api root from ENV
-  var url = 'http://localhost:3000' + path;
+  var url = serverOrigin + path;
   var jwt = localStorage.getItem('jwt');
 
   request.get(url)
@@ -22,6 +24,7 @@ Actions.fetch.listen((path) => {
     .end((response) => {
       if(response.unauthorized) {
         Actions.setJwt();
+        return;
       }
 
       if (response.ok) {
@@ -31,5 +34,35 @@ Actions.fetch.listen((path) => {
       }
   });
 });
+
+Actions.uploadBankStatement.listen((files) => {
+  var url = serverOrigin + '/bank_statements';
+  var jwt = localStorage.getItem('jwt');
+
+  attachFiles(request.post(url), files)
+    .set('Authorization', 'Bearer ' + jwt)
+    .end((response) => {
+      if(response.unauthorized) {
+        Actions.setJwt();
+      }
+
+      debugger
+      if (response.ok) {
+        Actions.uploadBankStatement.completed(response);
+      } else {
+        Actions.uploadBankStatement.failed(response);
+      }
+  });
+
+
+});
+
+function attachFiles(request, files) {
+  for (var i = 0; i < files.length; i++) {
+    request.attach('bank_statement[file]', files[i], files[i].name);
+  }
+
+  return request;
+}
 
 module.exports = Actions;

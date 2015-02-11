@@ -5,6 +5,7 @@ var { Route, RouteHandler, Link, DefaultRoute } = Router;
 var App = require('./components/app')
 var Home = require('./components/home')
 var Resource = require('./components/resource')
+var BankTransactions = require('./components/bank_transactions')
 
 React.initializeTouchEvents(true)
 
@@ -13,7 +14,7 @@ var routes =
     <DefaultRoute name="home" handler={Home}/>
     <Route name="accounts" handler={Resource}/>
     <Route name="transactions" handler={Resource}/>
-    <Route name="bank_transactions" handler={Resource}/>
+    <Route name="bank_transactions" handler={BankTransactions}/>
   </Route>
   // <DefaultRoute handler={Home} />
   // <Route name="about" handler={About} />

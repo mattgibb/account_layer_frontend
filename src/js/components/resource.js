@@ -3,9 +3,7 @@ var Router = require('react-router')
 var Reflux = require('reflux')
 
 var Actions = require('../actions/actions')
-
 var resources = require('../stores/resources')
-
 var FilterableTable = require('./filterable_table/filterable_table')
 
 var Resource = React.createClass({
