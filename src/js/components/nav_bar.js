@@ -1,9 +1,13 @@
 var React = require('react')
+var Reflux = require('reflux')
 var {Link} = require('react-router')
 
 var Actions = require('../actions/actions')
+var Admin = require('../stores/admin')
 
 var NavBar = React.createClass({
+  mixins: [Reflux.connect(Admin)],
+
   signOut() {
     Actions.setJwt();
   },
@@ -35,7 +39,7 @@ var NavBar = React.createClass({
          <div id="navbar" className="collapse navbar-collapse">
            {this.links()}
            <ul className="nav navbar-nav navbar-right">
-             <li><p className="admin-name">{this.props.adminName}</p></li>
+             <li><a style={{color: '#87EFF9'}}>{(this.state.admin || {}).name}</a></li>
              <li><a onClick={this.signOut}>Sign Out</a></li>
            </ul>
          </div>
