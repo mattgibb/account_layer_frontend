@@ -6,4 +6,4 @@ npm install webpack-dev-server -g
 npm install
 
 # Dev
-webpack-dev-server --progress --colors
+npm run server

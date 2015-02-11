@@ -4,6 +4,7 @@
   "description": "An accounting React app",
   "main": "webpack.config.js",
   "scripts": {
+    "server": "webpack-dev-server --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matt Gibb",
