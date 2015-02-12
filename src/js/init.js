@@ -5,7 +5,7 @@ var { Route, RouteHandler, Link, DefaultRoute } = Router;
 var App = require('./components/app')
 var Home = require('./components/home')
 var Resource = require('./components/resource')
-var BankTransactions = require('./components/bank_transactions')
+var BankTransactions = require('./components/bank_transactions/bank_transactions')
 
 React.initializeTouchEvents(true)
 

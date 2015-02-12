@@ -1,16 +1,12 @@
 var React = require('react');
 
 var Table = React.createClass({
+  renderActions(model) {
+    var Actions = this.props.actions
+    if(Actions)
+      return <Actions model={model} />;
+  },
 
-/**
-  headings: ->
-    @props.records[0]
-    some: "heading", another: "column"
-
-  buttons: (model) ->
-    _.map model.actions(), (action) ->
-      action model: model
-*/
   render() {
     var {attributes, models} = this.props.records || {};
     if(!(attributes && models)) return <div/>;
@@ -21,7 +17,7 @@ var Table = React.createClass({
       );
       return <tr key={model.id}>
         {values}
-        <td>Some buttons!</td>
+        {this.renderActions(model)}
       </tr>
     });
 

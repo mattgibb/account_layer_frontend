@@ -1,9 +1,10 @@
 var React = require('react')
 var Reflux = require('reflux')
 
-var {uploadBankStatement} = require('../actions/actions')
-var Resource = require('./resource')
-var Dropzone = require('./dropzone')
+var {uploadBankStatement} = require('../../actions/actions')
+var Resource = require('../resource')
+var Dropzone = require('../dropzone')
+var BankTransactionActions = require('./bank_transaction_actions')
 
 var BankTransactions = React.createClass({
   // listenToMany includes child actions too
@@ -40,7 +41,7 @@ var BankTransactions = React.createClass({
   render() {
     return (
       <div>
-        <Resource/>
+        <Resource actions={BankTransactionActions}/>
         {this.alert()}
         <Dropzone onDrop={this.onDrop}>
           {alert}

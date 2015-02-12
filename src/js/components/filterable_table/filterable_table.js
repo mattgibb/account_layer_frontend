@@ -7,17 +7,17 @@ var FilterableTable = React.createClass({
     return {filterText: ''}
   },
 
+  handleUserInput(filterText) {
+    this.setState({filterText: filterText})
+  },
+
   render() {
     return (
     <div>
-      <Table records={this.props.records}/>
+      <Table records={this.props.records} actions={this.props.actions}/>
     </div>
 //    <FilterBox filterText={this.state.filterText} onUserInput={handleUserInput} />
     )
-  },
-
-  handleUserInput(filterText) {
-    this.setState({filterText: filterText})
   }
 })
 

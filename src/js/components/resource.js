@@ -37,7 +37,7 @@ var Resource = React.createClass({
 
   render() {
     return (
-      <FilterableTable records={this.state.records} />
+      <FilterableTable records={this.state.records} actions={this.props.actions}/>
     )
   }
 })
