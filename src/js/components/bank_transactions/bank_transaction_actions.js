@@ -1,6 +1,7 @@
 var React = require('react')
 var request = require('superagent')
 var api = require('../../api');
+var Actions = require('../../actions/actions')
 
 window.request = request;
 
@@ -13,7 +14,7 @@ var BankTransactionActions = React.createClass({
   },
 
   getAccount(accountId) {
-    if(accountId == "") return;
+    if(!accountId) return;
 
     var self = this;
 
@@ -43,7 +44,15 @@ var BankTransactionActions = React.createClass({
   },
 
   onClick() {
-    alert('hello');
+    var bankTransactionId = this.props.model.id;
+    var accountId = this.state.accountId;
+    var path = '/bank_transactions/' +
+               bankTransactionId +
+               '/reconciliation'
+    if(accountId)
+      api.post(path)
+        .send({account_id: accountId})
+        .end(() => Actions.fetch('/bank_transactions'))
   },
 
   render() {

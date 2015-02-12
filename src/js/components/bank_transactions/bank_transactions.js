@@ -13,8 +13,13 @@ var BankTransactions = React.createClass({
   })],
 
   onUpload()         { this.setState({status: {info: "Uploading statement..."}}) },
-  onUploadComplete() { this.setState({status: {success: "Statement successfully uploaded."}}) },
   onUploadFailed()   { this.setState({status: {danger: "There was a problem uploading the statement."}}) },
+  onUploadCompleted(response) {
+    if(response.status == 201)
+      this.setState({status: {success: "Statement successfully uploaded."}});
+    if(response.status == 200)
+      this.setState({status: {success: "Statement had already been uploaded."}});
+  },
 
   getInitialState() {
     return {};
