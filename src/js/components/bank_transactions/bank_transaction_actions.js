@@ -56,6 +56,9 @@ var BankTransactionActions = React.createClass({
   },
 
   render() {
+    if(this.props.model.is_reconciled)
+      return <td>Reconciled</td>;
+
     return (
       <td>
         <input type="text"
