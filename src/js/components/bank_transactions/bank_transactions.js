@@ -25,7 +25,7 @@ var BankTransactions = React.createClass({
     return {};
   },
 
-    alert() {
+  alert() {
     var status = this.state.status;
     if(status) {
       var type = Object.keys(status)[0];

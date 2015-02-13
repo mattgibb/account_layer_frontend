@@ -5,7 +5,11 @@ var Actions = require('../actions/actions')
 function parseJwt(jwt) {
   // see http://jwt.io/ for details
   if(jwt)
-    return JSON.parse(atob(jwt.split('.')[1]));
+    try {
+      return JSON.parse(atob(jwt.split('.')[1]));
+    } catch(e) {
+      Actions.setJwt();
+    }
 }
 
 function payload(jwt) {
