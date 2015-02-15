@@ -1,9 +1,12 @@
 var React = require('react')
 var Reflux = require('reflux')
 var {Link} = require('react-router')
+var {Navbar, Nav, NavItem, DropdownButton, MenuItem} = require('react-bootstrap')
+var {NavItemLink, MenuItemLink} = require('react-router-bootstrap')
 
 var Actions = require('../actions/actions')
 var Admin = require('../stores/admin')
+window.ReactBootstrap = require('react-bootstrap')
 
 var NavBar = React.createClass({
   mixins: [Reflux.connect(Admin)],
@@ -12,39 +15,26 @@ var NavBar = React.createClass({
     Actions.setJwt();
   },
 
-  links() {
-    return (
-      <ul className="nav navbar-nav">
-        <li><Link to="home">Home</Link></li>
-        <li><Link to="/accounts">Accounts</Link></li>
-        <li><Link to="/transactions">Transactions</Link></li>
-        <li><Link to="/bank_transactions">Bank Transactions</Link></li>
-      </ul>
-    )
-  },
-
   render() {
     return (
-      <nav className="navbar navbar-fixed-top navbar-inverse">
-       <div className="container">
-         <div className="navbar-header">
-           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-             <span className="sr-only">Toggle navigation</span>
-             <span className="icon-bar"></span>
-             <span className="icon-bar"></span>
-             <span className="icon-bar"></span>
-           </button>
-           <a className="navbar-brand" href="#">Account Layer</a>
-         </div>
-         <div id="navbar" className="collapse navbar-collapse">
-           {this.links()}
-           <ul className="nav navbar-nav navbar-right">
-             <li><a style={{color: '#87EFF9'}}>{(this.state.admin || {}).name}</a></li>
-             <li><a onClick={this.signOut}>Sign Out</a></li>
-           </ul>
-         </div>
-       </div>
-     </nav>
+      <Navbar fixedTop inverse>
+        <Nav>
+          <div className="navbar-header">
+            <a className="navbar-brand" href="#">Account Layer</a>
+          </div>
+          <NavItemLink to="/accounts" eventKey={1}>Accounts</NavItemLink>
+          <NavItemLink to="/transactions" eventKey={2}>Transactions</NavItemLink>
+          <DropdownButton eventKey={3} title="Imports">
+            <MenuItemLink to="/bank_transactions" eventKey="1">Bank Transactions</MenuItemLink>
+            <MenuItem divider />
+            <MenuItemLink to="/first_associates_transactions" eventKey="2">First Associates Transactions</MenuItemLink>
+          </DropdownButton>
+        </Nav>
+        <Nav right>
+          <NavItem className={"admin-name"}>{(this.state.admin || {}).name}</NavItem>
+          <NavItem onSelect={this.signOut}>Sign Out</NavItem>
+        </Nav>
+      </Navbar>
     )
   }
 })

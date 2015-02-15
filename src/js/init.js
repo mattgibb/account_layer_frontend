@@ -1,6 +1,6 @@
 var React = require('react')
 var Router = require('react-router');
-var { Route, RouteHandler, Link, DefaultRoute } = Router;
+var { Route, RouteHandler, DefaultRoute } = Router;
 
 var App = require('./components/app')
 var Home = require('./components/home')
@@ -15,6 +15,7 @@ var routes =
     <Route name="accounts" handler={Resource}/>
     <Route name="transactions" handler={Resource}/>
     <Route name="bank_transactions" handler={BankTransactions}/>
+    <Route name="first_associates_transactions" handler={BankTransactions}/>
   </Route>
   // <DefaultRoute handler={Home} />
   // <Route name="about" handler={About} />

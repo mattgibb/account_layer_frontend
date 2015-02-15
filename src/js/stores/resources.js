@@ -32,7 +32,12 @@ function createResource(name) {
 }
 
 var resources = {};
-['accounts', 'transactions', 'bank_transactions'].forEach((resource) => {
+[
+  'accounts',
+  'transactions',
+  'bank_transactions',
+  'first_associates_transactions'
+].forEach((resource) => {
   resources['/'+resource] = createResource(resource);
 })
 
