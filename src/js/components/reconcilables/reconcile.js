@@ -1,11 +1,11 @@
 var React = require('react')
-var request = require('superagent')
+var Router = require('react-router')
 var api = require('../../api');
 var Actions = require('../../actions/actions')
 
-window.request = request;
+var Reconcile = React.createClass({
+  mixins: [Router.State],
 
-var BankTransactionActions = React.createClass({
   getInitialState() {
     return {
       accountId: null,
@@ -44,15 +44,18 @@ var BankTransactionActions = React.createClass({
   },
 
   onClick() {
-    var bankTransactionId = this.props.model.id;
+    Router.State
+
+    var modelId = this.props.model.id;
     var accountId = this.state.accountId;
-    var path = '/bank_transactions/' +
-               bankTransactionId +
-               '/reconciliation'
+    var basePath = this.getPathname();
+    var path = basePath +
+               '/' + modelId +
+               '/reconciliation';
     if(accountId)
       api.post(path)
         .send({account_id: accountId})
-        .end(() => Actions.fetch('/bank_transactions'))
+        .end(() => Actions.fetch(basePath))
   },
 
   render() {
@@ -77,4 +80,4 @@ var BankTransactionActions = React.createClass({
   }
 })
 
-module.exports = BankTransactionActions;
+module.exports = Reconcile;

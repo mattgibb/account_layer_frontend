@@ -4,6 +4,7 @@ var request = require('superagent');
 var Actions = Reflux.createActions({
   fetch: {asyncResult: true},
   uploadBankStatement: {asyncResult: true},
+  uploadFirstAssociatesReport: {asyncResult: true},
   setJwt: {}
 });
 
@@ -30,22 +31,32 @@ Actions.fetch.listen((path) => {
   });
 });
 
-Actions.uploadBankStatement.listen((files) => {
-  api.post('/bank_statements')
-    .use(attachFiles(files))
-    .end((response) => {
-      if (response.ok) {
-        Actions.uploadBankStatement.completed(response);
-      } else {
-        Actions.uploadBankStatement.failed(response);
-      }
-  });
-});
+
+Actions.uploadBankStatement.listen(
+  uploadCallback(Actions.uploadBankStatement, '/bank_statements')
+);
+Actions.uploadFirstAssociatesReport.listen(
+  uploadCallback(Actions.uploadFirstAssociatesReport, '/first_associates_reports')
+);
 
 function attachFiles(files) {
   return function(request) {
     for (var i = 0; i < files.length; i++) {
-      request.attach('bank_statement[file]', files[i], files[i].name);
+      request.attach('file', files[i], files[i].name);
     }
   }
+}
+
+function uploadCallback(action, path) {
+  return (files) => {
+    api.post(path)
+      .use(attachFiles(files))
+      .end((response) => {
+        if (response.ok) {
+          action.completed(response);
+        } else {
+          action.failed(response);
+        }
+    });
+  };
 }

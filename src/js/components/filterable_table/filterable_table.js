@@ -14,7 +14,7 @@ var FilterableTable = React.createClass({
   render() {
     return (
     <div>
-      <Table records={this.props.records} actions={this.props.actions}/>
+      <Table records={this.props.records}/>
     </div>
 //    <FilterBox filterText={this.state.filterText} onUserInput={handleUserInput} />
     )

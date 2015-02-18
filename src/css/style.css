@@ -6,3 +6,12 @@ body {
 .navbar-inverse .navbar-nav>li.admin-name>a {
   color: #87EFF9
 }
+
+.jumbotron-group:before, .jumbotron-group:after {
+  content: "";
+  display: table;
+}
+
+.jumbotron-group:after {
+  clear: both;
+}

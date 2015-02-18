@@ -5,9 +5,26 @@ var Reflux = require('reflux')
 var Actions = require('../actions/actions')
 var resources = require('../stores/resources')
 var FilterableTable = require('./filterable_table/filterable_table')
+var Reconcile = require('./reconcilables/reconcile')
 
 var Resource = React.createClass({
   mixins: [Router.State, Reflux.ListenerMixin],
+
+  propTypes: {
+    reconcilable: React.PropTypes.bool
+  },
+
+  childContextTypes: {
+    actions: React.PropTypes.func,
+    reconcilable: React.PropTypes.bool
+  },
+
+  getChildContext() {
+    return {
+      actions: (this.props.reconcilable && Reconcile),
+      reconcilable: this.props.reconcilable
+    }
+  },
 
   onFetch(records) {
     this.setState({
@@ -37,7 +54,7 @@ var Resource = React.createClass({
 
   render() {
     return (
-      <FilterableTable records={this.state.records} actions={this.props.actions}/>
+      <FilterableTable records={this.state.records}/>
     )
   }
 })

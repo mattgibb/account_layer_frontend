@@ -1,10 +1,14 @@
 var React = require('react');
 
 var Table = React.createClass({
+  contextTypes: {
+    actions: React.PropTypes.func
+  },
+
   renderActions(model) {
-    var Actions = this.props.actions
+    var Actions = this.context.actions
     if(Actions)
-      return <Actions model={model} />;
+      return <Actions model={model}/>;
   },
 
   render() {
