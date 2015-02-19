@@ -2,8 +2,6 @@ var React = require('react')
 var Reflux = require('reflux')
 var Dropzone = require('./dropzone')
 
-var uploadFile = require('../mixins/upload_file')
-
 var FileUploadButton = React.createClass({
   // listenToMany includes child actions too
   // mixins: [Reflux.listenToMany({
