@@ -33,8 +33,14 @@ var Reconcile = React.createClass({
     if(!account) return;
     if(account == 'not found') return <span>not found</span>;
 
-    var type = account.type.split('::').reverse()[0]
-    return <span>{type} ({account.credit_or_debit}): ${account.balance}</span>
+    var description = account.type.split('::').reverse()[0]
+    if(account.customer_name && account.customer_type) {
+      description += ' of '
+                  + account.customer_name
+                  + ' (' + account.customer_type + ")"
+    }
+
+    return <span>{description}</span>
   },
 
   onChange(e) {
