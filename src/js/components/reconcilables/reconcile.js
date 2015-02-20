@@ -1,5 +1,7 @@
 var React = require('react')
+var Reflux = require('reflux')
 var Router = require('react-router')
+var {Alert} = require('react-bootstrap')
 var api = require('../../api');
 var Actions = require('../../actions/actions')
 
@@ -50,18 +52,33 @@ var Reconcile = React.createClass({
   },
 
   onClick() {
-    Router.State
-
     var modelId = this.props.model.id;
     var accountId = this.state.accountId;
     var basePath = this.getPathname();
     var path = basePath +
                '/' + modelId +
                '/reconciliation';
+    // TODO: change to flux pattern
     if(accountId)
       api.post(path)
         .send({account_id: accountId})
-        .end(() => Actions.fetch(basePath))
+        .end((response) => {
+          if(response.ok) {
+            Actions.fetch(basePath)
+          } else {
+            this.setState(response.body);
+          }
+        })
+  },
+
+  alert() {
+    if (this.state.error) {
+      return (
+        <Alert bsStyle="danger" onDismiss={() => this.setState({error: undefined})} dismissAfter={3000}>
+          {this.state.error}
+        </Alert>
+      );
+    }
   },
 
   render() {
@@ -77,6 +94,7 @@ var Reconcile = React.createClass({
                onChange={this.onChange}
                onKeydown={this.onKeydown} />
         {this.showAccount()}
+        {this.alert()}
         <br/>
         <button className="btn btn-primary" onClick={this.onClick}>
           Reconcile
