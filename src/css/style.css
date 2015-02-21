@@ -20,3 +20,21 @@ body {
 .btn:focus {
   outline: none !important;
 }
+
+.table-enter {
+  opacity: 0.01;
+  transition: opacity .2s ease-in;
+}
+
+.table-enter.table-enter-active {
+  opacity: 1;
+}
+
+.table-leave {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+.table-leave.table-leave-active {
+  opacity: 0.01;
+}

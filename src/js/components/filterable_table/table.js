@@ -1,14 +1,10 @@
-var React = require('react');
+var React = require('react/addons');
+var TransitionGroup = React.addons.CSSTransitionGroup;
+
 
 var Table = React.createClass({
   contextTypes: {
     actions: React.PropTypes.func
-  },
-
-  renderActions(model) {
-    var Actions = this.context.actions
-    if(Actions)
-      return <Actions model={model}/>;
   },
 
   render() {
@@ -16,12 +12,13 @@ var Table = React.createClass({
     if(!(attributes && models)) return <div/>;
 
     var rows = models && models.map((model) => {
-      values = attributes.map((attribute) =>
-        <td>{model[attribute]}</td>
+      values = attributes.map((attribute, i) =>
+        <td key={i}>{model[attribute]}</td>
       );
+      var Actions = this.context.actions;
+      if(Actions) values.push(<Actions model={model} key={values.length}/>);
       return <tr key={model.id}>
         {values}
-        {this.renderActions(model)}
       </tr>
     });
 
@@ -36,10 +33,9 @@ var Table = React.createClass({
           }
           </tr>
         </thead>
-
-        <tbody>
+        <TransitionGroup transitionName="table" component="tbody">
           {rows}
-        </tbody>
+        </TransitionGroup>
       </table>
     )
   }
